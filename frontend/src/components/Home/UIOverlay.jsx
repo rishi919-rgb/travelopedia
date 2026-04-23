@@ -1,7 +1,8 @@
 import React from 'react';
 import { Layers, Navigation, Plus, Minus } from 'lucide-react';
+import SOSButton from './SOSButton';
 
-const UIOverlay = () => {
+const UIOverlay = ({ onSOSClick }) => {
   return (
     <div style={{
       position: 'absolute',
@@ -9,9 +10,13 @@ const UIOverlay = () => {
       bottom: '2rem',
       display: 'flex',
       flexDirection: 'column',
-      gap: '1rem',
+      gap: '1.5rem',
       zIndex: 10
     }}>
+      {/* Safety Layer */}
+      <SOSButton onClick={onSOSClick} />
+
+      {/* Map Controls */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
         <ActionButton icon={<Layers size={20} />} />
         <ActionButton icon={<Navigation size={20} />} active />

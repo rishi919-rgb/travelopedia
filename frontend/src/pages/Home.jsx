@@ -4,9 +4,11 @@ import SearchHeader from '../components/Home/SearchHeader';
 import UIOverlay from '../components/Home/UIOverlay';
 import BottomSheet from '../components/Common/BottomSheet';
 import DiscoveryPanel from '../components/Home/DiscoveryPanel';
+import SOSAlertModal from '../components/Safety/SOSAlertModal';
 
 const Home = () => {
   const [isSheetOpen, setSheetOpen] = useState(true);
+  const [isSOSOpen, setSOSOpen] = useState(false);
 
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
@@ -15,7 +17,7 @@ const Home = () => {
       
       {/* UI Layers */}
       <SearchHeader />
-      <UIOverlay />
+      <UIOverlay onSOSClick={() => setSOSOpen(true)} />
       
       {/* Explore Trigger Button */}
       <button 
@@ -50,6 +52,12 @@ const Home = () => {
       >
         <DiscoveryPanel />
       </BottomSheet>
+
+      {/* Safety Modals */}
+      <SOSAlertModal 
+        isOpen={isSOSOpen} 
+        onClose={() => setSOSOpen(false)} 
+      />
     </div>
   );
 };
