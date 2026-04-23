@@ -5,6 +5,7 @@ import UIOverlay from '../components/Home/UIOverlay';
 import BottomSheet from '../components/Common/BottomSheet';
 import DiscoveryPanel from '../components/Home/DiscoveryPanel';
 import SOSAlertModal from '../components/Safety/SOSAlertModal';
+import ModeSelector from '../components/Home/ModeSelector';
 
 const Home = () => {
   const [isSheetOpen, setSheetOpen] = useState(true);
@@ -18,6 +19,7 @@ const Home = () => {
       {/* UI Layers */}
       <SearchHeader />
       <UIOverlay onSOSClick={() => setSOSOpen(true)} />
+      <ModeSelector />
       
       {/* Explore Trigger Button */}
       <button 
