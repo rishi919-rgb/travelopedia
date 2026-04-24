@@ -36,7 +36,7 @@ const ChatInterface = () => {
 
       <div style={{ position: 'relative', marginTop: 'auto' }}>
         <input
-          placeholder="Ask AURA anything..."
+          placeholder="Ask Travelopedia anything..."
           style={{
             width: '100%',
             padding: '1.25rem 3.5rem 1.25rem 1.5rem',

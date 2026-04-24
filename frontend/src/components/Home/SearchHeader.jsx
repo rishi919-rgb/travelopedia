@@ -60,16 +60,20 @@ const SearchHeader = () => {
         </button>
       </div>
       
-      <div className="glass" style={{
-        width: '56px',
-        height: '56px',
-        borderRadius: '50%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        boxShadow: 'var(--shadow-lg)',
-        cursor: 'pointer'
-      }}>
+      <div 
+        onClick={() => navigate('/login')}
+        className="glass" 
+        style={{
+          width: '56px',
+          height: '56px',
+          borderRadius: '50%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: 'var(--shadow-lg)',
+          cursor: 'pointer'
+        }}
+      >
         <User size={20} color="var(--accent-primary)" />
       </div>
     </div>

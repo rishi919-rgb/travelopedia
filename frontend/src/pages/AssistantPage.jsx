@@ -30,7 +30,7 @@ const AssistantPage = () => {
           }}>
             <Sparkles color="white" size={20} />
           </div>
-          <h1 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', fontFamily: 'Outfit' }}>AURA AI</h1>
+          <h1 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', fontFamily: 'Outfit' }}>Travelopedia AI</h1>
         </div>
         <button 
           onClick={() => navigate(-1)} 
