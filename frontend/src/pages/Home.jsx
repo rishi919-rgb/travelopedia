@@ -6,20 +6,26 @@ import BottomSheet from '../components/Common/BottomSheet';
 import DiscoveryPanel from '../components/Home/DiscoveryPanel';
 import SOSAlertModal from '../components/Safety/SOSAlertModal';
 import ModeSelector from '../components/Home/ModeSelector';
+import SafetyLayers from '../components/Map/SafetyLayers';
+import BottomNav from '../components/Navigation/BottomNav';
 
 const Home = () => {
-  const [isSheetOpen, setSheetOpen] = useState(true);
+  const [isSheetOpen, setSheetOpen] = useState(false);
   const [isSOSOpen, setSOSOpen] = useState(false);
 
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
       {/* Background Map Layer */}
-      <MapComponent />
+      <MapComponent>
+        <SafetyLayers />
+      </MapComponent>
       
       {/* UI Layers */}
       <SearchHeader />
       <UIOverlay onSOSClick={() => setSOSOpen(true)} />
       <ModeSelector />
+      
+      <BottomNav />
       
       {/* Explore Trigger Button */}
       <button 

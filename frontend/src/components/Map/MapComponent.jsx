@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Map from 'react-map-gl';
+import { Map } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-const MapComponent = () => {
+const MapComponent = ({ children }) => {
   const [viewState, setViewState] = useState({
     longitude: -122.4,
     latitude: 37.8,
@@ -21,6 +21,7 @@ const MapComponent = () => {
         mapboxAccessToken={mapboxToken}
         reuseMaps
       >
+        {children}
         {/* Pins/Layers will be added here in future steps */}
       </Map>
     </div>
