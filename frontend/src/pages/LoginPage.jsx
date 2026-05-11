@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login, reset } from '../store/slices/authSlice';
 import Input from '../components/Common/Input';
 import { motion } from 'framer-motion';
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -14,11 +15,16 @@ const LoginPage = () => {
   const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
   useEffect(() => {
+    if (isError) {
+      toast.error(message || 'Invalid email or password');
+    }
+
     if (isSuccess || user) {
+      toast.success('Welcome back!');
       navigate('/');
     }
     dispatch(reset());
-  }, [user, isSuccess, navigate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const formik = useFormik({
     initialValues: {
@@ -83,20 +89,7 @@ const LoginPage = () => {
             error={formik.errors.password}
           />
 
-          {isError && (
-            <div style={{ 
-              background: 'rgba(255, 77, 77, 0.1)', 
-              color: '#ff4d4d', 
-              padding: '0.75rem', 
-              borderRadius: '12px', 
-              fontSize: '0.85rem',
-              marginBottom: '1.5rem',
-              textAlign: 'center',
-              border: '1px solid rgba(255, 77, 77, 0.2)'
-            }}>
-              {message || 'Invalid email or password'}
-            </div>
-          )}
+
 
           <button
             type="submit"
