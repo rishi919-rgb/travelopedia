@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register, reset } from '../store/slices/authSlice';
 import Input from '../components/Common/Input';
 import { motion } from 'framer-motion';
+import toast from 'react-hot-toast';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -14,11 +15,16 @@ const RegisterPage = () => {
   const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
   useEffect(() => {
+    if (isError) {
+      toast.error(message || 'Registration failed. Try again.');
+    }
+
     if (isSuccess || user) {
+      toast.success('Account created successfully!');
       navigate('/');
     }
     dispatch(reset());
-  }, [user, isSuccess, navigate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const formik = useFormik({
     initialValues: {
@@ -108,19 +114,7 @@ const RegisterPage = () => {
             error={formik.errors.confirmPassword}
           />
 
-          {isError && (
-            <div style={{ 
-              background: 'rgba(255, 77, 77, 0.1)', 
-              color: '#ff4d4d', 
-              padding: '0.75rem', 
-              borderRadius: '12px', 
-              fontSize: '0.85rem',
-              marginBottom: '1.5rem',
-              textAlign: 'center'
-            }}>
-              {message || 'Registration failed. Try again.'}
-            </div>
-          )}
+
 
           <button
             type="submit"
