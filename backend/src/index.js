@@ -37,9 +37,25 @@ io.on('connection', (socket) => {
     
     // Store latest location
     activeTrackers.set(userId, { lat, lng, accuracy, timestamp, socketId: socket.id });
+  });
+
+  // === SOS Events ===
+
+  // When a user triggers SOS, broadcast to ALL connected clients (future: target emergency contacts)
+  socket.on('sos_triggered', (data) => {
+    console.log(`🆘 SOS triggered by user: ${data.userName} at [${data.lat}, ${data.lng}]`);
     
-    // Future expansion: If SOS is active, emit to emergency contacts
-    // io.to(contactRoom).emit('sos_location_update', { lat, lng });
+    // Broadcast to all connected clients for now
+    // In Phase 4, this will be scoped to emergency contact rooms only
+    io.emit('sos_alert', {
+      ...data,
+      message: `SOS from ${data.userName || 'Unknown User'}`,
+    });
+  });
+
+  socket.on('sos_cancelled', (data) => {
+    console.log(`🔕 SOS cancelled by user: ${data.userId}`);
+    io.emit('sos_resolved', { userId: data.userId });
   });
 
   // Basic disconnect event
