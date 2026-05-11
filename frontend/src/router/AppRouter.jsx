@@ -5,6 +5,7 @@ import ScannerPage from '../pages/ScannerPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import ProfilePage from '../pages/ProfilePage';
+import NotFoundPage from '../pages/NotFoundPage';
 import PrivateRoute from '../components/Common/PrivateRoute';
 
 const AppRouter = () => {
@@ -37,7 +38,8 @@ const AppRouter = () => {
       />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      {/* Additional routes will be added here as features are implemented */}
+      {/* 404 catch-all */}
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };
