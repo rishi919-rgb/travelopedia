@@ -1,9 +1,11 @@
 import React from 'react';
 import { Search, Menu, User, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const SearchHeader = () => {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <div style={{
@@ -61,7 +63,7 @@ const SearchHeader = () => {
       </div>
       
       <div 
-        onClick={() => navigate('/login')}
+        onClick={() => navigate(user ? '/profile' : '/login')}
         className="glass" 
         style={{
           width: '56px',
