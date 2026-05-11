@@ -4,6 +4,7 @@ import { ModeProvider } from './context/ModeContext';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { Toaster } from 'react-hot-toast';
+import LocationTracker from './components/Common/LocationTracker';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <ModeProvider>
         <BrowserRouter>
           <div className="app-container">
+            <LocationTracker />
             <AppRouter />
             <Toaster 
               position="top-center" 
