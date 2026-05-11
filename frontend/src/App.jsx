@@ -3,6 +3,7 @@ import AppRouter from './router/AppRouter';
 import { ModeProvider } from './context/ModeContext';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
@@ -11,6 +12,17 @@ function App() {
         <BrowserRouter>
           <div className="app-container">
             <AppRouter />
+            <Toaster 
+              position="top-center" 
+              toastOptions={{ 
+                style: { 
+                  background: 'var(--bg-tertiary)', 
+                  color: 'var(--text-primary)',
+                  borderRadius: '12px',
+                  border: '1px solid var(--glass-border)'
+                } 
+              }} 
+            />
           </div>
         </BrowserRouter>
       </ModeProvider>
