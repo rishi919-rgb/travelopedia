@@ -35,7 +35,7 @@ const TypingIndicator = () => (
   </motion.div>
 );
 
-const ChatInterface = () => {
+const ChatInterface = ({ pendingPrompt, onPromptConsumed }) => {
   const [messages, setMessages] = useState([WELCOME_MESSAGE]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -46,8 +46,17 @@ const ChatInterface = () => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
 
-  const sendMessage = useCallback(async () => {
-    const trimmed = input.trim();
+  // When a carousel chip is tapped, auto-fill and auto-send
+  useEffect(() => {
+    if (pendingPrompt && !isLoading) {
+      handleSend(pendingPrompt);
+      if (onPromptConsumed) onPromptConsumed();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingPrompt]);
+
+  const handleSend = useCallback(async (overrideMessage) => {
+    const trimmed = (overrideMessage || input).trim();
     if (!trimmed || isLoading) return;
 
     const userMsg = { role: 'user', text: trimmed };
@@ -79,6 +88,8 @@ const ChatInterface = () => {
       setIsLoading(false);
     }
   }, [input, isLoading, messages]);
+
+  const sendMessage = () => handleSend();
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {

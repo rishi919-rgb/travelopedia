@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import ChatInterface from '../components/Assistant/ChatInterface';
 import ActionCarousel from '../components/Assistant/ActionCarousel';
 import { X, Sparkles } from 'lucide-react';
@@ -6,6 +6,13 @@ import { useNavigate } from 'react-router-dom';
 
 const AssistantPage = () => {
   const navigate = useNavigate();
+  // Shared input state — lifted up so ActionCarousel can pre-fill ChatInterface
+  const chatRef = useRef(null);
+  const [pendingPrompt, setPendingPrompt] = useState('');
+
+  const handleSelectPrompt = (prompt) => {
+    setPendingPrompt(prompt);
+  };
 
   return (
     <div className="fade-in" style={{ 
@@ -50,14 +57,15 @@ const AssistantPage = () => {
       </header>
 
       <div style={{ marginBottom: '1.5rem' }}>
-        <ActionCarousel />
+        <ActionCarousel onSelectPrompt={handleSelectPrompt} />
       </div>
 
       <div style={{ flex: 1, overflow: 'hidden' }}>
-        <ChatInterface />
+        <ChatInterface ref={chatRef} pendingPrompt={pendingPrompt} onPromptConsumed={() => setPendingPrompt('')} />
       </div>
     </div>
   );
 };
 
 export default AssistantPage;
+
