@@ -4,6 +4,7 @@ import AssistantPage from '../pages/AssistantPage';
 import ScannerPage from '../pages/ScannerPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
+import ProfilePage from '../pages/ProfilePage';
 import PrivateRoute from '../components/Common/PrivateRoute';
 
 const AppRouter = () => {
@@ -23,6 +24,14 @@ const AppRouter = () => {
         element={
           <PrivateRoute>
             <ScannerPage />
+          </PrivateRoute>
+        } 
+      />
+      <Route 
+        path="/profile" 
+        element={
+          <PrivateRoute>
+            <ProfilePage />
           </PrivateRoute>
         } 
       />
