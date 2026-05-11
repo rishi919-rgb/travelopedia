@@ -1,96 +1,154 @@
-# Travelopedia – AI Travel Companion
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/rishi919-rgb/travelopedia/main/frontend/public/logo.png" alt="Travelopedia" width="60" />
+  <br />
+  Travelopedia – AI Travel Companion
+</h1>
 
-> Your intelligent, context-aware travel partner for safety, discovery, and seamless journeys.
+<p align="center">
+  <b>A production-grade, full-stack travel safety platform powered by real-time data, geospatial intelligence, and an AI assistant (AURA).</b>
+</p>
 
-**Figma Design**: https://www.figma.com/design/4fYUX71AGbIBLB1eZoPCew/Untitled?node-id=318-13&t=VeaJUe0H8SFmklQt-1
-
----
-
-## 🌟 Problem Statement
-Modern travelers face persistent challenges that diminish the joy of exploration:
-- **Safety Concerns**: Solo travelers, especially women, often feel vulnerable in unfamiliar environments lacking real-time safety nets.
-- **Resource Scarcity**: Finding critical amenities like charging stations or pharmacies on-the-go is time-consuming.
-- **Language Barriers**: Menus and signs become obstacles without instant translation tools.
-- **Generic Experiences**: Over-reliance on tourist traps leads to missing authentic local culture.
-
-## 💡 The Solution
-Travelopedia integrates **context-aware intelligence** to transform travel into a secure, enriching, and effortless experience. By combining real-time safety mechanisms, utility services, AI-driven assistance, and vision-based translation, it acts as a true digital companion.
-
----
-
-## 🚀 Key Features
-
-### 🛡️ Safety System
-- **SOS Alert**: One-tap emergency signal sharing live location with contacts and authorities.
-- **Safe Zones**: Dynamically updated areas rated by safety scores and user feedback.
-- **Live Tracking**: Optional real-time location sharing during journeys.
-
-### ⚡ Utility Layer
-- **Resource Finder**: Real-time availability of public chargers (EV & device) and clinics.
-- **Essential Services**: ATMs, water refill points, and public restrooms.
-
-### 🤖 AI Assistant
-- **Travelopedia AI**: Chat-based concierge for itinerary changes, local customs, and emergency phrases.
-- **Proactive Tips**: Contextual advice (e.g., “Rain expected—visit the Prado Museum nearby”).
-
-### 📷 Vision System
-- **AR Translation**: Point camera at text for instant AR overlay translation.
-- **Object Recognition**: Identify landmarks or products for contextual info.
+<p align="center">
+  <img src="https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react" />
+  <img src="https://img.shields.io/badge/Node.js-Express-339933?style=flat&logo=node.js" />
+  <img src="https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat&logo=mongodb" />
+  <img src="https://img.shields.io/badge/Socket.IO-Realtime-010101?style=flat&logo=socket.io" />
+  <img src="https://img.shields.io/badge/Google-Gemini_AI-4285F4?style=flat&logo=google" />
+  <img src="https://img.shields.io/badge/Mapbox-GL-000000?style=flat&logo=mapbox" />
+</p>
 
 ---
 
-## 🎒 Travel Mode System
-The interface and intelligence adapt dynamically to three distinct traveler profiles:
+## ✨ Features
 
-| Mode | Priority | UI Adaptation | Recommendation Focus |
-|------|----------|---------------|----------------------|
-| **Solo Female** | Maximum Safety | Prominent SOS, safe zone highlighting | Well-lit paths, female-hosted stays |
-| **Solo Traveler** | Exploration | Balanced safety & discovery alerts | Hostels, co-working cafes |
-| **Family** | Comfort | Stroller-friendly routes, rest stops | Parks, kid-friendly venues |
+| Feature | Status |
+|---|---|
+| 🔐 JWT Authentication (Register / Login) | ✅ Complete |
+| 🗺️ Interactive Mapbox Dark Map | ✅ Complete |
+| 🤖 AURA — Gemini-powered AI Assistant | ✅ Complete |
+| ⚡ Quick Action Carousel (auto-prompt AI) | ✅ Complete |
+| 📍 Live Location Tracking (WebSocket) | ✅ Complete |
+| 🆘 Real-time SOS Broadcast System | ✅ Complete |
+| 🏥 Geospatial POI Queries (Clinics, Chargers) | ✅ Complete |
+| 🛡️ Safe Zone Boundary Engine | ✅ Complete |
+| 👤 User Profile Dashboard | ✅ Complete |
+| 🔔 Global Toast Notification System | ✅ Complete |
+| 🔒 Private Route Guards | ✅ Complete |
+| 🌐 Centralized Axios API with JWT Injection | ✅ Complete |
 
 ---
 
-## 🛠️ Tech Stack
-- **Frontend**: React (Vite), Redux Toolkit, Framer Motion, Tailwind CSS.
-- **Backend**: Node.js / Express REST API (AWS EC2).
-- **Database**: MongoDB Atlas.
-- **Maps**: Mapbox GL JS.
-- **AI/Vision**: OpenAI GPT-4o / Gemini / Tesseract.js.
+## 🏗️ Architecture
 
----
-
-## 🏗️ System Architecture
-```plaintext
-+---------------------+      +---------------------+      +---------------------+
-|   Mobile Web Client |<---->|     API Gateway     |<---->|   Auth Service      |
-|    (React / Vite)   |      | (Node.js/Express)   |      | (JWT / MongoDB)     |
-+---------------------+      +---------------------+      +---------------------+
-          ^                           ^                          ^
-          |                           |                          |
-+---------------------+      +---------------------+      +---------------------+
-|   Safety Engine     |      |   Utility Engine    |      |   AI Vision Engine  |
-| (SOS, Tracking)     |      | (POIs, Routing)     |      | (OCR, Recognition)  |
-+---------------------+      +---------------------+      +---------------------+
+```
+travelopedia/
+├── frontend/                  # React + Vite application
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Assistant/     # ChatInterface, ActionCarousel
+│   │   │   ├── Common/        # Loader, PrivateRoute, LocationTracker
+│   │   │   ├── Home/          # Map UI, DiscoveryPanel, SOSButton
+│   │   │   └── Map/           # MapComponent (Mapbox GL)
+│   │   ├── pages/             # Home, Login, Register, Profile, Assistant, Scanner
+│   │   ├── router/            # AppRouter with protected routes
+│   │   ├── services/          # api.js (Axios), socket.js (Socket.IO)
+│   │   └── store/             # Redux Toolkit (authSlice, poiSlice)
+│   └── .env                   # VITE_API_URL, VITE_MAPBOX_TOKEN
+│
+└── backend/                   # Node.js + Express API
+    ├── src/
+    │   ├── config/            # MongoDB connection
+    │   ├── controllers/       # auth, user, poi, ai controllers
+    │   ├── middlewares/       # JWT protect middleware
+    │   ├── models/            # user, poi, safezone models
+    │   └── routes/            # auth, user, poi, ai routes
+    └── .env                   # PORT, MONGO_URI, JWT_SECRET, GEMINI_API_KEY
 ```
 
 ---
 
-## 📦 Installation & Setup
+## 🚀 Quick Start
 
-1. **Clone & Setup**
-   ```bash
-   git clone https://github.com/rishi919-rgb/travelopedia.git
-   cd travelopedia
-   ```
+### Prerequisites
+- Node.js v18+
+- MongoDB Atlas account
+- Mapbox Access Token
+- Google Gemini API Key
 
-2. **Frontend**
-   ```bash
-   cd frontend && npm install
-   npm run dev
-   ```
+### 1. Clone the repository
+```bash
+git clone https://github.com/rishi919-rgb/travelopedia.git
+cd travelopedia
+```
 
-3. **Backend**
-   ```bash
-   cd ../backend && npm install
-   npm run dev
-   ```
+### 2. Configure Environment Variables
+
+**Backend** — create `backend/.env`:
+```env
+PORT=5000
+MONGO_URI=your_mongodb_atlas_connection_string
+JWT_SECRET=your_super_secret_jwt_key
+GEMINI_API_KEY=your_google_gemini_api_key
+```
+
+**Frontend** — create `frontend/.env`:
+```env
+VITE_API_URL=http://localhost:5000/api
+VITE_MAPBOX_TOKEN=your_mapbox_access_token
+```
+
+### 3. Install dependencies & run
+
+```bash
+# Backend
+cd backend
+npm install
+npm run dev
+
+# Frontend (in a new terminal)
+cd frontend
+npm install
+npm run dev
+```
+
+The app will be available at **http://localhost:5173**
+
+---
+
+## 🔌 API Reference
+
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| `POST` | `/api/auth/register` | ❌ | Register a new user |
+| `POST` | `/api/auth/login` | ❌ | Login and receive JWT |
+| `GET` | `/api/user/profile` | ✅ | Get authenticated user profile |
+| `PUT` | `/api/user/profile` | ✅ | Update user profile & travel mode |
+| `GET` | `/api/pois` | ❌ | Get all Points of Interest |
+| `GET` | `/api/pois/radius/:lat/:lng/:km` | ❌ | Get POIs within a radius |
+| `POST` | `/api/ai/chat` | ✅ | Send a message to AURA (Gemini AI) |
+
+---
+
+## ⚡ Real-Time Socket Events
+
+| Event | Direction | Description |
+|---|---|---|
+| `location_update` | Client → Server | Emit live GPS coordinates |
+| `sos_triggered` | Client → Server | Broadcast an SOS alert |
+| `sos_cancelled` | Client → Server | Cancel an active SOS |
+| `sos_alert` | Server → All Clients | Receive SOS notification |
+| `sos_resolved` | Server → All Clients | SOS has been cancelled |
+
+---
+
+## 🛠️ Tech Stack
+
+**Frontend:** React 18, Vite, Redux Toolkit, React Router v6, Mapbox GL, Framer Motion, Formik, Yup, react-hot-toast, Socket.IO Client, Lucide React
+
+**Backend:** Node.js, Express, MongoDB, Mongoose, Socket.IO, JSON Web Tokens, Google Generative AI (Gemini)
+
+---
+
+## 📄 License
+
+MIT © [Rishi](https://github.com/rishi919-rgb)
